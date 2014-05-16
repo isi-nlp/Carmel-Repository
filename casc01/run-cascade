@@ -1,0 +1,5 @@
+
+CARMEL=/nfs/nlg/tools/graehl/cage/bin/carmel.static
+
+echo '"CAR"' | $CARMEL -sliOEk 15 ../wfst01/wfst01 ../wfst02/wfst02
+
