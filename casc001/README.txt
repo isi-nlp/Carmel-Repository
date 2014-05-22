@@ -1,7 +1,7 @@
 
 Paraphrases English, word-by-word, by composing input string with English->French WFST, then with French->English WFST.
 
-% echo '"BIG" "CAR" "ACCIDENT"' | carmel -sliOWk 100 ../wfst01/wfst01 ../wfst02/wfst02 | sort | uniq 
+% echo '"BIG" "CAR" "ACCIDENT"' | carmel -sliOWk 100 ../wfst001/wfst001 ../wfst002/wfst002 | sort | uniq 
 
 "BIG" "AUTO" "ACCIDENT"
 "BIG" "AUTOMOBILE" "ACCIDENT"

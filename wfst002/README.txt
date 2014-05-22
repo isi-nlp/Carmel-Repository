@@ -2,7 +2,7 @@
 Huge French-English word-for-word t-table, implemented as WFST, with
 probabilities P(e|f).
 
-% echo '"MAISON"' | carmel -sliOEk 5 huge-french-word.wfst
+% echo '"MAISON"' | carmel -sliOEk 5 wfst002
 Input line 1: "MAISON"
         (2 states / 4 arcs)
 "HOME" 0.539183
