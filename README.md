@@ -3,13 +3,20 @@ Carmel-Repository
 
 This is a repository for all finite-state machines that are compatible with the Carmel toolkit (http://www.isi.edu/licensed-sw/carmel).
 
-(W)FSA | Description
+FSA | Description
+------------- | -------------
+none yet | none yet
+
+WFSA | Description
 ------------- | -------------
 wfsa001 | English letter 2-gram model, P(e)
 
-(W)FST | Description
+FST | Description
 ------------- | -------------
 fst001 | English-to-Cipher letter substitutor, fully connected
+
+WFST | Description
+------------- | -------------
 wfst001 | English-to-French word-to-word translator, P(f&#124;e)
 wfst002 | French-to-English word-to-word translator, P(e&#124;f)
 
