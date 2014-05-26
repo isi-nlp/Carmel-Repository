@@ -14,6 +14,8 @@ wfsa001 | English letter 2-gram model, P(e)
 FST | Description
 ------------- | -------------
 fst001 | English-to-Cipher letter substitutor, fully connected
+fst002 | English-to-IPA, built from CMU Pron Dict
+fst003 | Pinyin-if-to-pinyin, bi-directional  
 
 WFST | Description
 ------------- | -------------
