@@ -11,7 +11,9 @@ Input line 1: "i" "s" "i" # "is" # "awesome"
 Derivations found for all 1 inputs
 Viterbi (best path) product of probs=0.00111492394569933, probability=2^-9.80884 per-input-symbol-perplexity(N=7)=2^1.40126 per-line-perplexity(N=1)=2^9.80884
 ```
+
 Note:
+
 1. Input should be all lowercase
 2. Input should not contain punctuation. ( `#`is treat as word boundary. )
 3. Should split abbreviation into letters, e.g. "ISI" to "i" "s" "i" .
