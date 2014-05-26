@@ -15,14 +15,17 @@ FST | Description
 ------------- | -------------
 fst001 | English-to-Cipher letter substitutor, fully connected
 fst002 | English-to-IPA, built from CMU Pron Dict
-fst003 | Pinyin-if-to-pinyin, bi-directional  
+fst003 | Pinyin-if-to-pinyin, bi-directional
 
 WFST | Description
 ------------- | -------------
 wfst001 | English-to-French word-to-word translator, P(f&#124;e)
 wfst002 | French-to-English word-to-word translator, P(e&#124;f)
+wfst003 | Pinyin-to-Chinese bi-directional P(p|c) and P(c|p)
+wfst004 | Pinyin-if-to-Epron, Pinyin initial/final to IPA (English Pronounciation)
 
 Cascade | Description
 ------------- | -------------
 casc001 | English-to-English word-to-word paraphraser, P(e&#124;e)
 casc002 | English letter-substitution cipher solver
+casc003 | English-to-Chinglish

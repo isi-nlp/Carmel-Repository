@@ -25,6 +25,7 @@ Derivations found for all 1 inputs
 Viterbi (best path) product of probs=1, probability=2^0 per-input-symbol-perplexity(N=5)=2^-0 per-line-perplexity(N=1)=2^-0
 ```
 
+Note: The FST is built by `build.py`
 
 
 
