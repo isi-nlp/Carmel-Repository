@@ -13,7 +13,7 @@ Viterbi (best path) product of probs=1, probability=2^0 per-input-symbol-perplex
 
 Note: Word Boundary `#` is preserved.
 
-```java
+```
 echo '"hello" #  "word"' | carmel -sliEOk 1 eword-epron3.fst.wb 
 
 Input line 1: "hello" #  "word"
