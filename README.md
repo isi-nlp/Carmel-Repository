@@ -10,6 +10,7 @@ none yet | none yet
 WFSA | Description
 ------------- | -------------
 wfsa001 | English letter 2-gram model, P(e)
+wfsa002 | English phoneme 3-gram model, P(epron); plus generic n-gram WFSA builder
 
 FST | Description
 ------------- | -------------
