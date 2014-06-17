@@ -25,7 +25,7 @@ wfst001 | English-to-French word-to-word translator, P(f&#124;e)
 wfst002 | French-to-English word-to-word translator, P(e&#124;f)
 wfst003 | Pinyin-to-Chinese bi-directional P(p&#124;c) and P(c&#124;p)
 wfst004 | Pinyin-if-to-Epron, Pinyin initial/final to IPA (English Pronounciation)
-wfst005 | English-to-Syllable-Stress
+wfst005 | English-to-Syllable-Stress, includes original CMU pronunciation lexicon
 wfst006 | English phonemes to grapheme (spell out), useful for OOV
 
 Cascade | Description
