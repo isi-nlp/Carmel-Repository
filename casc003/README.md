@@ -20,5 +20,5 @@ Note:
 4. Numbers should be pronounced out, e.g "22" to "twenty" "two".
 
 #### Reference
-Xing Shi, Kevin Knight and Heng Ji, *How to Speak a Foreign Kanguage Without Knowing It*, ACL 2014.
+Xing Shi, Kevin Knight and Heng Ji, *How to Speak a Foreign Language Without Knowing It*, ACL 2014.
 
