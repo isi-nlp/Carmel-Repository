@@ -2,8 +2,7 @@
 Letter trigram models for dozens of languages.  Data is the UN Declaration
 of Human Rights (UNDHR), files also included.  Note that accent marks have 
 been removed from letters, as is the custom in cryptography, so most of the
-symbols are 'a-z' and '_' (for space).  These LMs require '_' at the beginning 
-and end of the string.
+symbols are 'a-z' and '_' (for space).  
 
 Usage:
 
