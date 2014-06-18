@@ -11,6 +11,7 @@ WFSA | Description
 ------------- | -------------
 wfsa001 | English letter 2-gram model, P(e)
 wfsa002 | English phoneme 3-gram model, P(epron); plus generic n-gram WFSA builder
+wfsa003 | Letter 3-gram models for dozens of languages, built from UNDHR data
 
 FST | Description
 ------------- | -------------
