@@ -1,6 +1,9 @@
 
 Letter trigram models for dozens of languages.  Data is the UN Declaration
-of Human Rights (UNDHR), files also included.
+of Human Rights (UNDHR), files also included.  Note that accent marks have 
+been removed from letters, as is the custom in cryptography, so most of the
+symbols are 'a-z' and '_' (for space).  These LMs require '_' at the beginning 
+and end of the string.
 
 Usage:
 
@@ -12,7 +15,7 @@ Usage:
 
 "a" "r" "b" "e" "r" "_" "i" "r" "_" "a" "n" "g" "_" "u" "n" "m" "e" "n" "_" "e" "b" "e" "i" "n" "d" "_" "s" "t" "a" "a" "t" "_" "v" "o" "n" "_" "g" "e" "i" "t" "_" "d" "e" "r" "_" "g" "e" "n" "_" "d" "e" "r" "_" "b" "e" "h" "u" "t" "e" "_" "b" "e" "n" "_" "s" "e" "r" "e" "h" "u" "l" "t" "_" "d" "e" "r" "u" "n" "d" "_" "i" "_" "o" "d" "e" "n" "i" "e" "_" "d" "i" "g" "e" "n" "_" "h" "a" "_" "o" "d" "e" "r" "h" "n" "d" "_" "i" "n" "e" "r" "_" "m" "i" "l" "l" "e" "_" "e" "r" "_" "g" "r" "i" "e" "l" "b" "a" "r" "u" "n" "d" "_" "i" "h" "e" "n" "_" "l" "a" "r" "t" "g" "l" "e" "i" "t" "e" "t" "e" "r" "e" "u" "n" "g" "e" "m" "_" "f" "a" "n" "g" "_" "a" "l" "s" "c" "h" "_" "a" "n" "e" "d" "e" "r" "n" "_" "p" "o" "t" "i" "i" "n" "a" "b" "e" "n" "t" "e" "n" "o" "c" "h" "t" "_" "a" "u" "f" "_" "b" "e" "n" "_" "f" "r" "e" "i" "n" "e" "r" "_" "u" "n" "t" "z" "e" "i" "t" "_" "d" "i" "g" "e" "n" "_" "n" "a" "c" "h" "s" "_" "a" "u" "e" "n" "t" "s" "s" "t" "a" "a" "t" "i" "g" "e" "n" "_" "s" "i" "c" "h" "l" "i" "g" "e" "n" "_" "w" "e" "r" "_" "h" "a" "t" "i" "o" "n" "a" "t" "_" "n" "a" "l" "e" "n" "_" "a" "l" "l" "e" "c" "h" "t" "_" "a" "n" "_" "z" "u" "_" "h" "a" "b" "e" "n" "_" "d" "u" "r" "_" "v" "e" "r" "d" "e" "n" "_"
 
-Languages with integer codes:
+Languages, with their integer codes:
 
   2  english
   3  abkhazian
