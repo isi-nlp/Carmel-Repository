@@ -8,9 +8,8 @@ WFST=/nfs/nlg/tools/graehl/cage/bin/carmel.static
 # usage:
 #   make-ngram-a file
 
-# need file and file.smooth.  both double spaced.
-# example in this directory: plain & plain.smooth
-# this program uses carmel to train smoothing paramaters.
+# file contains double spaced data. 
+# example in this directory: pron 
 
 echo 'counting ngrams...'
 

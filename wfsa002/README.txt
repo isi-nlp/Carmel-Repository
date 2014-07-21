@@ -2,8 +2,7 @@
 English phoneme trigram model.
 
 Trigrams counts taken from 95% of the CMU dictionary (file: pron).  Note: this 
-is done over word types, not weighted by frequency!).  Smoothing lambdas 
-are estimated by EM on 5% of the dictionary that is held out (file: pron.smooth).
+is done over word types, not weighted by frequency!  
 
 Usage:
 
