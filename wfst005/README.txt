@@ -44,7 +44,7 @@ rhythm "(S S*)^5".  viterbi alignments after EM training looks like this:
 
 =======================================================================
 
-Bigger model
+Bigger models
 
 wfst005 only has a 20k vocabulary (word types used in English poetry 
 that this model was trained on).  For example, it has:
@@ -57,6 +57,15 @@ that this model was trained on).  For example, it has:
 	NEARS
 but not NEARLY.  
 
-Marjan created wfst005.full by supplementing wfst005 with the rest of 
+1) Marjan created wfst005.full by supplementing wfst005 with the rest of 
 the CMU pronunciation dictionary.
 
+2) Marjan also created a deterministic wfst005.test{.cap} with a vocab that 
+is the intersection between PTB with (CMU + poetry). 
+
+  a) multi-syllable words => 
+     stress taken from CMU (if multiple, all get p=1).
+
+  b) one-syllable words => 
+     stress taken from poetry (only majority class, with p=1), or
+     if not in poetry, then stress taken from CMU.
