@@ -26,7 +26,7 @@ rm $1.u1 $1.u2 $1.u3
 
 echo 'END' > $1.bi.fsa
 echo '(START (START### *e* *e* 0.9!))' >> $1.bi.fsa
-echo '(START (UNI *e* *e* 1.0!))' >> $1.bi.fsa
+echo '(START (UNI *e* *e* 0.1!))' >> $1.bi.fsa
 echo '(UNI (END *e* *e*))' >> $1.bi.fsa
 
 echo 'making bigram skeleton...'
