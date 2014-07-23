@@ -2,6 +2,7 @@ Pronounce English words, including OOV.
 
 % echo '"D" "E" "R" "I"' | carmel -sliOEk 10 --exponents=1,1,.5,1,1 ../wfst007/wfst007 ../wfsa005/wfsa005 ../wfst008/wfst008 ../wfst009/wfst009 
 
+
 "D" "EH" "R" "IY" 0.0016550460911633
 "D" "EH" "R" "IY" 0.00162377027856493
 "D" "EH" "R" "IY" 0.00107819593482002
