@@ -19,7 +19,7 @@ Usage:
 
 Notes:
 
-Start and end tags are recommended for best results, although they are not required. A FST that automatically adds start and end tags could be built quite easily.
+Start and end tags are recommended for best results, although they are not required. An FST that automatically adds start and end tags could be built quite easily.
 
 This was built from aligned CMU pronunciation data (KN/N IGH/AY T/T). All possible pronunciation -> spelling ngrams are counted, including start and end tags. Then the ngrams are pruned: All ngrams that are not full words (with start and end tags) and with counts of 1 are pruned; ngrams that are not full words (with or without start and end tags) and with counts < 10 are also pruned. The counts are then divided.
 
