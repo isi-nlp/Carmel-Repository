@@ -12,6 +12,8 @@ WFSA | Description
 wfsa001 | English letter 2-gram model, P(e)
 wfsa002 | English phoneme 3-gram model, P(epron); plus generic n-gram WFSA builder
 wfsa003 | Letter 3-gram models for dozens of languages, built from UNDHR data
+wfsa004 | Letter 3-gram model for English, built from Penn Treebank plaintext
+wfsa005 | Pronounceable grapheme segment 3-gram model for English, built from the aligned CMU Pronunciation Dictionary
 
 FST | Description
 ------------- | -------------
@@ -28,6 +30,9 @@ wfst003 | Pinyin-to-Chinese bi-directional P(p&#124;c) and P(c&#124;p)
 wfst004 | Pinyin-if-to-Epron, Pinyin initial/final to IPA (English Pronounciation)
 wfst005 | English-to-Syllable-Stress, includes original CMU pronunciation lexicon
 wfst006 | English phonemes to grapheme (spell out), useful for OOV
+wfst007 | English graphemes to pronounceable grapheme segment sequences
+wfst008 | Adds start and end tags to English pronounceable grapheme segment sequences
+wfst009 | English pronounceable grapheme segment sequences to phoneme (pronouncer), useful for OOV
 
 Cascade | Description
 ------------- | -------------
