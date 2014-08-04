@@ -14,6 +14,7 @@ wfsa002 | English phoneme 3-gram model, P(epron); plus generic n-gram WFSA build
 wfsa003 | Letter 3-gram models for dozens of languages, built from UNDHR data
 wfsa004 | Letter 3-gram model for English, built from Penn Treebank plaintext
 wfsa005 | Pronounceable grapheme segment 3-gram model for English, built from the aligned CMU Pronunciation Dictionary
+wfsa006 | Accepts any word of alphabet [A-Z] except for the word "FILTER." Includes code for building any such filter.
 
 FST | Description
 ------------- | -------------
