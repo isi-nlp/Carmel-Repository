@@ -1,5 +1,13 @@
 0
 (0 (0 # #))
+(0 (x x *e*))
+(x (0 ue "xue"))
+(0 (x x *e*))
+(x (0 u "xu"))
+(0 (q q *e*))
+(q (0 u "qu"))
+(0 (y y *e*))
+(y (0 o "yo"))
 (0 (0 ang "ang"))
 (0 (b b *e*))
 (b (0 ang "bang"))
