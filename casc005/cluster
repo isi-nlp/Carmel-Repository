@@ -1,0 +1,86 @@
+
+CARMEL=/nfs/nlg/tools/graehl/cage/bin/carmel.static
+
+#============================================================
+# EM Symbol clustering
+#
+# usage:
+#   % cluster <n-gram-order> <num-of-clusters> <cipher>
+#
+# <cipher> should be in carmel format, blank line alternating
+# with cipher line.
+#
+# output visualization files:
+#   cluster.viterbi
+#   cluster.table
+#
+# intermediate files:
+#   cluster.fsa, cluster.fst (plus trained versions)
+
+N=$1
+C=$2
+CIPHER=$3
+
+RESTARTS=20   # user can change this
+
+#============================================================
+# Make FSA
+
+echo 0 |
+awk 'BEGIN {printf("F\n");} 
+     {n='$N'; c='$C';
+      for (i=0; i<n; i++)
+       for (j=0; j<c**i; j++) {
+         printf("(%s-%s (F *e* *e*))\n", i, j);
+         for (k=0; k<c; k++)
+	   printf("(%d-%d (%d-%d *e* \"%d\"))\n",
+	          i, j, i+1, c*j+k, k)}
+      for (j=0; j<c**i; j++) {
+        printf("(%d-%d (F *e* *e*))\n", n, j);
+	for (k=0; k<c; k++) {
+	  a = j % c**(n-1);
+	  printf("(%d-%d (%d-%d *e* \"%d\"))\n",
+	         n, j, n, a*c + k, k)}}
+     }' > cluster.fsa 
+
+#============================================================
+# Make FST
+
+cat $CIPHER | tr ' ' '\012' | sort | uniq | awk 'NF==1' >z.chan.uni
+
+cat cluster.fsa | sed 's/)) *//g' | awk '{print $4}' | 
+sort | uniq | grep -v '\*e\*' | awk 'NF==1' >z.source.uni
+
+echo '0' > cluster.fst
+for a in `cat z.source.uni`
+do
+  for b in `cat z.chan.uni`
+  do
+    echo '(0 (0 '$a' '$b'))' >> cluster.fst
+  done
+done
+
+#============================================================
+# EM-clustering 
+
+$CARMEL --train-cascade -! $RESTARTS -HJX 0.99999 $CIPHER cluster.fsa cluster.fst
+
+# Viterbi cluster-assignment
+
+awk 'NF>0' $CIPHER > $CIPHER.noe
+$CARMEL -HJ --project-right --project-identity-fsa cluster.fsa.trained >cluster.fsa.trained.noe
+$CARMEL -briIQEWk 1 cluster.fsa.trained.noe cluster.fst.trained $CIPHER.noe > cluster.res
+
+#============================================================
+# Pretty-printing
+
+tr -d '"' < $3 > cluster.res2
+fold -sw 80 cluster.res | awk 'NF>0' >y1
+fold -sw 80 cluster.res2 | awk 'NF>0' >y2
+paste -d '~' y1 y2 | tr '~' '\012' | 
+awk '{if ((NR%2)==1) printf("\n"); printf("%s\n",$0)}' >cluster.viterbi
+
+more cluster.fst.trained | awk 'NF>1' | grep -v 'e-' | grep -v '0.000' | sed 's/))$//' | 
+sort -nrk 5,5 | awk '{printf("%s %s %5.3f\n",$3, $4,$5)}' | tr -d '"' |
+sort -sk 1,1 >cluster.table
+

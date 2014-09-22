@@ -41,3 +41,4 @@ casc001 | English-to-English word-to-word paraphraser, P(e&#124;e)
 casc002 | English letter-substitution cipher solver
 casc003 | English-to-Chinglish
 casc004 | English word to pronounciation
+casc005 | Symbol clustering using EM (any # of clusters, any n-gram order)
