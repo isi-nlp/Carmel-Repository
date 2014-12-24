@@ -1,7 +1,7 @@
 Carmel-Repository
 =================
 
-This is a repository for all finite-state machines that are compatible with the Carmel toolkit (http://www.isi.edu/licensed-sw/carmel).
+This is a repository for all finite-state machines that are compatible with the Carmel toolkit (http://www.isi.edu/licensed-sw/carmel) and tools for helping to create these machines.
 
 FSA | Description
 ------------- | -------------
@@ -42,3 +42,8 @@ casc002 | English letter-substitution cipher solver
 casc003 | English-to-Chinglish
 casc004 | English word to pronounciation
 casc005 | Symbol clustering using EM (any # of clusters, any n-gram order)
+
+
+Tools | Description
+------| -------------
+Zoph_LM | Make letter n-gram models like wfsa003 from text
