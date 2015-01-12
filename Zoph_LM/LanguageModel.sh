@@ -1,7 +1,6 @@
 #Runs the program
 #CARMEL=${CARMEL:-/home/knight/carmel-dl2/graehl/carmel/bin/linux64/carmel.static}
 CARMEL=${CARMEL:-./carmel}
-SEPARATOR=${SEPARATOR:-"_"}
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 echo ''
 echo 'Training Data =' $1
@@ -16,9 +15,9 @@ workdir=`mktemp -d $tmpdir/charlm.XXXXXX`;
 
 basewfsa=$workdir/base.wfsa
 smoothdata=$workdir/smooth.data
-python $DIR/LanguageModel.py $1 $3 $EXCOUNTS --separator $SEPARATOR -o $basewfsa &&\
+python $DIR/LanguageModel.py $1 $3 $EXCOUNTS -o $basewfsa &&\
 
-python $DIR/helper.py $2 --separator $SEPARATOR -o $smoothdata &&\
+python $DIR/helper.py $2 -o $smoothdata &&\
 
 $CARMEL -t -HJ -M 20 -X 0.99999 $smoothdata $basewfsa > $OUTFILE &&\
 

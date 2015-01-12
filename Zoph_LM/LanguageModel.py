@@ -4,14 +4,11 @@ import argparse
 from collections import defaultdict as dd
 import itertools
 import codecs
-from translitutil import escmap
-
 try:
     parser = argparse.ArgumentParser(description="build a character lm fst")
     parser.add_argument('trainFile', help='data to get counts from')
     parser.add_argument('nGramSize', type=int, default=2, help='What NGram model the user wants to have')
     parser.add_argument('countsToRemove', type=int, default=0, help='Zero by default, can be made to (n) not include counts <= (n)')
-    parser.add_argument('--separator', default='_', help='token dividing words')
     parser.add_argument("--outfile", "-o", default='Non_Trained.wfsa', help='name of file to write')
     args = parser.parse_args()
 except:
@@ -23,7 +20,6 @@ except:
 trainFile = args.trainFile
 nGramSize = args.nGramSize
 countsToRemove = args.countsToRemove
-separator = args.separator
 reader = codecs.getreader('utf8')
 writer = codecs.getwriter('utf8')
 
@@ -38,13 +34,37 @@ previousCounts = {} #Counts of N-Gram size nG
 currentProbabilities = {} #Current probabilites of N-Gram size nG+1
 previousProbabilities = {} #Probabilities with N-Gram size nG
 
+#Now preprocess the text so to tokenize it:
+for i in range(0,len(trainText)):
+    if ((trainText[i].count('"') % 2) == 1) or (trainText[i].count('"') == 0):
+        print "Error bad input format in train file on line",i+1
+        sys.exit()
+    line = list(trainText[i])
+
+    firstQuote = False #Used to signal whether first quote has been seen or not
+    tokens = []
+    token = ""
+    for char in line:
+        #In the process of getting token
+        if firstQuote:
+            if char == "\"":
+                firstQuote = False
+                tokens.append(token)
+                token = ""
+            else:
+                token +=char
+        #In the process of ignoring all characters until next quote is seen
+        else:
+            if char == "\"":
+                firstQuote = True
+                token = ""
+    trainText[i] = tokens
+
 for nG in range(0,nGramSize):
     
     #Getting current nGramCounts nG is one less than the current n-gram size counts being collected
     for i in range(0,len(trainText)): 
-        sentence = trainText[i]
-
-        sentence = [escmap[x] if x in escmap else x for x in sentence]
+        sentence = trainText[i][:]
         sentence.insert(0,"START")
         sentence.append("END")
 
@@ -71,7 +91,6 @@ for nG in range(0,nGramSize):
         for tup in currentCounts:
             if tup[0] != "START":
                 totalLetterCount+=currentCounts[tup]
-
 
     #Now lets get current Probabilities
     #Special case if unigram probabilities
@@ -158,12 +177,8 @@ states = dd(itertools.count().next)
 #Build first connections for unigrams
 for tup in unigramProbs:
     if tup[0] != "END":
-        if tup[0] != ' ':
-            endingState= str(states["~" + tup[0] + "~"])
-            LMFile.write("(UNI (" +endingState+" *e* \""+tup[0]+"\" "+str(unigramProbs[tup])+ "!))\n")
-        else:
-            endingState= str(states["~%s~" % separator])
-            LMFile.write("(UNI (" +endingState+" *e* \""+separator+"\" "+str(unigramProbs[tup])+ "!))\n")
+        endingState= str(states["~" + tup[0] + "~"])
+        LMFile.write("(UNI (" +endingState+" *e* \""+tup[0]+"\" "+str(unigramProbs[tup])+ "!))\n")
 
         #Now connections going to next stage
         startingState = endingState
@@ -178,12 +193,8 @@ for tup in unigramProbs:
 #Now for bigrams starting from the START symbol
 for tup in bigramProbs:
     if tup[0] == "START":
-        if tup[1] == ' ':
-            endingState= str(states["~%s~" % separator])
-            CharTransduced = "%s" % separator 
-        else:
-            CharTransduced = tup[1]
-            endingState= str(states["~" + tup[1] + "~"])
+        CharTransduced = tup[1]
+        endingState= str(states["~" + tup[1] + "~"])
         LMFile.write("(BI_START (" +endingState+" *e* \""+CharTransduced+"\" "+str(bigramProbs[tup])+ "!))\n")
 
 #Build the rest of the layers
@@ -220,19 +231,13 @@ for i in range(1,nGramSize-1):
         if tup[0] != "START":
             startState = []
             for j in range(0,len(tup)-1):
-                if tup[j] != ' ':
-                    startState.append(tup[j])
-                else:
-                    startState.append(separator)
+                startState.append(tup[j])
             startState = ''.join(startState)
             startState = str(states["~"+startState+"~"])+"P"
             if tup[-1] != "END":
                 finalState = []
                 for j in range(0,len(tup)):
-                    if tup[j] != ' ':
-                        finalState.append(tup[j])
-                    else:
-                        finalState.append(separator)
+                    finalState.append(tup[j])
                 finalState = ''.join(finalState)
                 finalState = str(states["~" + finalState + "~"])
             else:
@@ -240,8 +245,6 @@ for i in range(1,nGramSize-1):
 
             if tup[-1] == "END":
                 LMFile.write("("+startState+" (" + finalState + " *e* *e* " + str(previousDist[i][tup])+ "!))\n")
-            elif tup[-1] == " ":
-                LMFile.write("("+startState+" (" +finalState+" *e* \""+separator+"\" "+str(previousDist[i][tup])+ "!))\n")
             else:
                 LMFile.write("("+startState+" (" +finalState+" *e* \""+tup[-1]+"\" " +str(previousDist[i][tup])+ "!))\n")
 
@@ -252,10 +255,7 @@ for i in range(1,nGramSize-1):
 
                 newFinal = []
                 for j in range(1,len(tup)):
-                    if tup[j] != ' ':
-                        newFinal.append(tup[j])
-                    else:
-                        newFinal.append(separator)
+                    newFinal.append(tup[j])
 
                 newFinal = ''.join(newFinal)
                 newFinal = str(states["~"+newFinal+"~"])
@@ -267,26 +267,17 @@ for tup in previousDist[-1]:
     if tup[0] != "START":
         prevState = []
         for i in range(0,len(tup)-1):
-            if tup[i] == ' ':
-                prevState.append(separator)
-            else:
-                prevState.append(tup[i])
+            prevState.append(tup[i])
         prevState = ''.join(prevState)
         prevState = str(states["~" + prevState + "~"])+"P" 
 
         if tup[-1] != "END":
             endingState = []
             for i in range(1,len(tup)):
-                if tup[i] == ' ':
-                    endingState.append(separator)
-                else:
-                    endingState.append(tup[i])
+                endingState.append(tup[i])
             endingState = ''.join(endingState)
             endingState = str(states["~" + endingState + "~"])
-            if tup[-1] == ' ':
-                CharTransduced = separator
-            else:
-                CharTransduced = tup[-1]
+            CharTransduced = tup[-1]
             LMFile.write("("+prevState+" (" +endingState+" *e* \""+CharTransduced+"\" " +str(previousDist[-1][tup])+ "!))\n")
         else:
             LMFile.write("("+prevState+" (END *e* *e* " +str(previousDist[-1][tup])+ "!))\n")
