@@ -1,5 +1,0 @@
-
-CARMEL=/nfs/nlg/tools/graehl/cage/bin/carmel.static
-
-echo '"DANGEROUS" "TRIP"' | $CARMEL -sliOEk 35 ../wfst001/wfst001 ../wfst002/wfst002
-
