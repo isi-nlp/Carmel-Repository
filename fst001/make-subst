@@ -1,0 +1,13 @@
+
+# This program writes the FST to stdout.
+
+echo 0
+echo '(0 (0 "_" "_"))'
+for i in a b c d e f g h i j k l m n o p q r s t u v w x y z
+do
+  for j in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+  do
+    echo '(0 (0 "'$i'" "'$j'"))'
+  done
+done
+

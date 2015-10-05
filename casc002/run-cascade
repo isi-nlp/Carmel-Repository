@@ -1,0 +1,10 @@
+
+CARMEL=/nfs/nlg/tools/graehl/cage/bin/carmel.static
+
+$CARMEL -N 0 --project-right -HJ ../wfsa001/wfsa001 > wfsa001
+$CARMEL --project-right --project-identity-fsa wfsa001 >wfsa001.noe
+cp ../fst001/fst001 .
+$CARMEL --train-cascade -HJ -M 100 -! 20 cipher.data wfsa001 fst001
+awk 'NF>0' cipher.data > cipher.data.noe
+cat cipher.data.noe | $CARMEL -qbsriWIEk 1 wfsa001.noe fst001.trained
+

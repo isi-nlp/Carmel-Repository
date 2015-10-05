@@ -1,0 +1,55 @@
+
+WFST=/nfs/mozart4/trans/wfst/wfst
+WFST=/nfs/topaz/graehl/isd/carmel/bin/carmel.solaris.static
+WFST=/nfs/topaz/graehl/isd/carmel/bin/linux/carmel.static
+WFST=/nfs/topaz/graehl/isd/cage/bin/carmel.static
+WFST=/nfs/nlg/tools/graehl/cage/bin/carmel.static
+
+# usage:
+#   make-ngram-a file
+
+# file contains double spaced data. 
+# example in this directory: pron 
+
+echo 'counting ngrams...'
+
+cat $1 | tr ' ' '\012' | gawk 'NF > 0' >$1.u1
+gawk 'NR>1' $1.u1 >$1.u2
+gawk 'NR>2' $1.u1 >$1.u3
+sort $1.u1 | uniq -c | sort -nr >$1.uni
+paste -d ' ' $1.u1 $1.u2 | 
+gawk 'NF==2' | sort | uniq -c | sort -nr >$1.bi
+paste -d ' ' $1.u1 $1.u2 $1.u3 | 
+gawk 'NF==3' | sort | uniq -c | sort -nr >$1.tri
+rm $1.u1 $1.u2 $1.u3
+
+echo 'END' > $1.bi.fsa
+echo '(START (START### *e* *e* 0.9!))' >> $1.bi.fsa
+echo '(START (UNI *e* *e* 0.1!))' >> $1.bi.fsa
+echo '(UNI (END *e* *e*))' >> $1.bi.fsa
+
+echo 'making bigram skeleton...'
+
+cat $1.uni | tr -d '"' |
+gawk '{printf("(UNI (%s *e* \"%s\"))\n(START### (%s *e* \"%s\"))\n(%s (%s### *e* *e* 0.9!))\n(%s (UNI *e* *e* 0.1!))\n(%s### (END *e* *e*))\n",$2,$2,$2,$2,$2,$2,$2,$2)}' >> $1.bi.fsa
+
+cp $1.bi.fsa $1.tri.fsa
+
+cat $1.bi | tr -d '"' |
+gawk '{printf("(%s### (%s *e* \"%s\"))\n",$2,$3,$3)}' >> $1.bi.fsa
+
+echo 'making trigram skeleton...'
+
+cat $1.bi | tr -d '"' |
+gawk '{printf("(%s### (%s###%s *e* \"%s\"))\n(%s###%s (%s###%s### *e* *e* 0.9!))\n(%s###%s (%s *e* *e* 0.1!))\n(%s###%s (END *e* *e*))\n",$2,$2,$3,$3,$2,$3,$2,$3,$2,$3,$3,$2,$3)}' >>$1.tri.fsa
+
+cat $1.tri | tr -d '"' |
+gawk '{printf("(%s###%s (%s###%s *e* \"%s\"))\n",$2,$3,$3,$4,$4)}' >> $1.tri.fsa
+
+echo 'training smoothing models...'
+
+$WFST -Ht $1 $1.bi.fsa > $1.bi.wfsa
+sed 's/\*e\* "/"/' < $1.bi.wfsa > $1.bi.wfst
+$WFST -Ht $1 $1.tri.fsa > $1.tri.wfsa
+sed 's/\*e\* "/"/' < $1.tri.wfsa > $1.tri.wfst 
+
