@@ -43,6 +43,7 @@ casc002 | English letter-substitution cipher solver
 casc003 | English-to-Chinglish
 casc004 | English word to pronounciation
 casc005 | Symbol clustering using EM (any # of clusters, any n-gram order)
+casc006 | Poetry machines
 
 
 Tools | Description
