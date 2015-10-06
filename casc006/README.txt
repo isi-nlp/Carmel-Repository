@@ -1,5 +1,4 @@
 
-
 Poetry FSTs (by Marjan Ghazvininejad)
 
 =======================================================================
@@ -41,14 +40,18 @@ word2rhythm_and_rhyme.fst
 
     2) avoids one-syllable words, whose stress depends on context
        - only includes 6 one-syllable words (the, a, an, ...)
+       - NEW: Kevin added a few extra more
 
     3) assumes poetic meter is iambic (01)*
-       - only includes words with alternating stress (no 11 words like "typhoon")
-       - only gives rhyme info for words with stressed final syllables (...1)
+       - only includes words with alternating stress 
+       - no "11" words (like "typhoon")
+       - however, does include "...100" words (like "angela")
+         - treated as "101" for meter purposes
+         - however, rhyme is taken from the vowel of the "1" syllable
 
     4) concatenates results of words in sequence, e.g.:
 
-    % echo '"correct" "balloon"' | carmel -sliOQEWk 20 word2rhythm_and_rhyme.fst
+	    % echo '"correct" "balloon"' | carmel -sliOQEWk 20 word2rhythm_and_rhyme.fst
 
 	    _eh1_k_t*Rev 0Rev _uw1_n*Rev 0Rev
 	    _eh1_k_t*Rev 0Rev 0 1
@@ -78,5 +81,4 @@ between the two lines:
 % echo '"afghanistan" "afghanistan" "-trans-" "pakistan" "and" "afghanistan"' | carmel -sliOEQWk 5 word2rhythm_and_rhyme.fst 16syllabus-rhyhm.fsa
 
 0 1 0 1 0 1 0 _ae1_n* -trans- _ae1_n*Rev 0Rev 1Rev 0Rev 1Rev 0Rev 1Rev 0Rev
-
 

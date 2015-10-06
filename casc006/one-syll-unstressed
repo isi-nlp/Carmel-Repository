@@ -1,0 +1,22 @@
+
+# one syllable words with high probability of being unstressed,
+# according to unsupervised analysis of human sonnets [greene et al 10].
+
+# for comparison, G&K '15 used these: a, an, and, the, of, or.
+
+(0 (s0 "A" *e* 0.961906863981173))
+(0 (s0 "AN" *e* 0.895655154275108))
+(0 (s0 "AND" *e* 0.864673582416759))
+(0 (s0 "BUT" *e* 0.83303604730686))
+(0 (s0 "HER" *e* 0.83041965867808))
+(0 (s0 "HIS" *e* 0.896378901863523))
+(0 (s0 "ITS" *e* 0.8904941405494))
+(0 (s0 "MY" *e* 0.920152892602342))
+(0 (s0 "NO" *e* 0.866863350582787))
+(0 (s0 "NOR" *e* 0.907219784447691))
+(0 (s0 "OR" *e* 0.889039212296911))
+(0 (s0 "OUR" *e* 0.917927969256341))
+(0 (s0 "THE" *e* 0.941233908659165))
+(0 (s0 "THEIR" *e* 0.911625634968847))
+(0 (s0 "WHOSE" *e* 0.919528357922023))
+(0 (s0 "YOUR" *e* 0.916283876353093))
