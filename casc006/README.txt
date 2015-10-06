@@ -10,6 +10,12 @@ Poetry FSTs (by Marjan Ghazvininejad)
 	0 1 0 1 0 _ih1_l__iy0__er0* -trans- _ih1_l__iy0__er0*Rev 0Rev 1Rev 0Rev 1Rev 0Rev
 
 =======================================================================
+iamb-penta-couplet.fsa
+=======================================================================
+
+  Accepts iambic pentameter rhyming couplets.
+
+=======================================================================
 word2rhythm_and_rhyme.fst
 =======================================================================
 
@@ -71,14 +77,18 @@ word2rhythm_and_rhyme.fst
 	    0 1 0 _uw1_n*
 
 =======================================================================
-word2rhythm_and_rhyme.fst  +  16syllabus-rhyhm.fsa
+sonnet.wfsa = word2rhythm_and_rhyme.fst  o  iamb-penta-couplet.fsa
 =======================================================================
 
-Here, we test whether "afghanistan afghanistan afghanistan and pakistan" is a legal
-iambic tetrameter couplet.  Note that we must reverse the second line, and insert "-trans-"
-between the two lines:
+The sonnet.wfsa accepts all word sequences that legally form a sonnet.
 
-% echo '"afghanistan" "afghanistan" "-trans-" "pakistan" "and" "afghanistan"' | carmel -sliOEQWk 5 word2rhythm_and_rhyme.fst 16syllabus-rhyhm.fsa
+There are 2.1 x 10^31 legal sonnets with this vocabulary.
 
-0 1 0 1 0 1 0 _ae1_n* -trans- _ae1_n*Rev 0Rev 1Rev 0Rev 1Rev 0Rev 1Rev 0Rev
+% carmel -g 5 sonnet.wfsa
+
+"monopoly" "preserves" "devine" "steroid" "-trans-" "paranoid" "helmet" "lounging" "shaping" "but"
+"militiamen" "critique" "displayed" "sergei" "-trans-" "array" "centurion" "religiously"
+"rescheduling" "receptors" "entourage" "-trans-" "mirage" "pilotless" "sahara" "invests"
+"projecting" "magma" "axel" "massimo" "-trans-" "munro" "volleyball" "cyber" "turbo" "my"
+"hypocrisy" "prospectus" "motivate" "-trans-" "circulate" "convent" "accommodating"
 
